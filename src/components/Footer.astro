@@ -1,0 +1,33 @@
+---
+// src/components/Footer.astro (minimal)
+import { site, nav } from '../data/site';
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="container foot-in">
+    <a href="/" class="foot-brand" aria-label={`${site.name}, home`}><Logo variant="full" class="foot-logo" label="" /></a>
+    <nav class="foot-nav" aria-label="Footer">
+      {nav.map((l) => <a class="link" href={l.href}>{l.label}</a>)}
+      <a class="link" href="/contact">Contact</a>
+    </nav>
+    <div class="foot-meta">
+      <a class="link" href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a class="link" href={`mailto:${site.email}`}>Email</a>
+      <button class="link" type="button" data-to-top>Top ↑</button>
+    </div>
+  </div>
+  <div class="container foot-base">
+    <span>© {year} {site.name}. Made in Nigeria, shipped worldwide.</span>
+    <a class="link" href="/privacy/">Privacy</a><span>Site by <a class="link" href="https://portfolio-uvgo.vercel.app" target="_blank" rel="noopener noreferrer">OmniCraft Studios</a></span>
+  </div>
+</footer>
+<style is:global>
+  .foot { margin-top: clamp(4rem, 9vw, 7rem); border-top: 1px solid var(--line); padding-block: 2.5rem 1.2rem; }
+  .foot-in { display: grid; gap: 1.6rem; align-items: center; }
+  .foot-brand { display: block; } .foot-logo { height: 104px; }
+  .foot-nav, .foot-meta { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; font-size: .92rem; }
+  .foot-meta { color: var(--muted); }
+  .foot-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 1.5rem; margin-top: 1.8rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
+  @media (min-width: 1000px) { .foot-in { grid-template-columns: auto 1fr auto; } .foot-nav { justify-content: center; } }
+</style>

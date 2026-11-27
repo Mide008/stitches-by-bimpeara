@@ -1,0 +1,88 @@
+---
+// src/pages/[category].astro
+// One template, four pages. Edit the words in src/data/content.ts.
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { categoryPages } from '../data/content';
+import { faqSchema, crumbs, collectionSchema } from '../data/schema';
+import PieceModal from '../components/PieceModal.astro';
+import CurrencySelect from '../components/CurrencySelect.astro';
+import { BASE, format } from '../data/currency';
+import { waLink } from '../data/site';
+
+export function getStaticPaths() {
+  return categoryPages.map((c) => ({ params: { category: c.slug }, props: { c } }));
+}
+const { c } = Astro.props;
+const others = categoryPages.filter((x) => x.slug !== c.slug);
+const schema = [
+  crumbs([{ name: 'Home', path: '/' }, { name: c.label, path: `/${c.slug}/` }]),
+  faqSchema(c.faqs),
+  collectionSchema(c),
+];
+---
+<Base title={c.label} description={c.metaDescription} ogSlot={c.heroPhoto} schema={schema}>
+  <section class="cat-hero" data-hero>
+    <div class="container grid">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="Breadcrumb" data-hero-fade><a href="/">Home</a><span>/</span><span>{c.label}</span></nav>
+        <p class="eyebrow" style="margin-top:1.4rem" data-hero-fade>{c.eyebrow}</p>
+        <h1 style="margin:1rem 0 1.4rem">{c.title.map((l) => <span class="line"><span class="line-in" set:html={l} /></span>)}</h1>
+        <p class="lede" data-hero-fade style="max-width:32rem;color:var(--muted)">{c.intro}</p>
+        <div class="ctas" data-hero-fade style="margin-top:1.6rem">
+          <button class="btn btn-primary" type="button" data-open-enquiry data-interest={c.interest} data-magnetic data-cursor="Talk">{c.cta}</button>
+          <a class="btn btn-ghost" href={waLink(`Hello Adebimpe, I am interested in ${c.label}.`)} target="_blank" rel="noopener noreferrer" data-magnetic>WhatsApp her</a>
+        </div>
+      </div>
+      <div class="cat-cluster" data-cluster="right" data-static aria-label="Selected pieces">
+        {[c.heroPhoto, c.pieces[0].photo, c.pieces[1].photo].map((slot, i) => (
+          <a class="card" data-card href="#pieces" data-cursor="View"><span class="card-in"><Photo slot={slot} alt={i === 0 ? c.heroAlt : c.pieces[i - 1].name} ratio="4 / 5" eager={i === 0} sizes="(min-width: 900px) 18vw, 40vw" /></span></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container sec" id="pieces" style="padding-top:2rem">
+    <div class="sec-head"><p class="eyebrow" data-reveal>{c.eyebrow}</p><h2 data-reveal>{c.piecesTitle}</h2></div>
+    <div class="price-bar" data-reveal><p data-currency-note>Prices are starting prices in Nigerian naira. The final price is confirmed when you enquire.</p><CurrencySelect /></div>
+    <div class="pieces">
+      {c.pieces.map((p) => (
+        <article class="piece">
+          <button class="piece-open" type="button" data-tilt3d data-piece-open data-name={p.name} data-note={p.note} data-cat={c.label} data-interest={c.interest} data-base-price={p.price} data-base-prices={JSON.stringify(p.prices ?? {})} aria-label={`View ${p.name}`} data-cursor="Quick view">
+            <Photo slot={p.photo} alt={p.name} mask ratio="4 / 5" sizes="(min-width: 1000px) 30vw, (min-width: 640px) 45vw, 90vw" />
+          </button>
+          <h3>{p.name}</h3>
+          <p>{p.note}</p>
+          <p class="price"><span class="price-from">From</span> <span data-price={p.price} data-prices={JSON.stringify(p.prices ?? {})}>{format(p.price, BASE, 'en-NG')}</span></p>
+          <button class="ask" type="button" data-open-enquiry data-interest={c.interest} data-piece={p.name}>Ask about this</button>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head"><p class="eyebrow" data-reveal>The detail</p><h2 data-reveal>{c.detailTitle}</h2></div>
+    <div class="details">
+      {c.details.map((d) => (<div class="detail" data-reveal><h3>{d.h}</h3><p>{d.p}</p></div>))}
+    </div>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head"><p class="eyebrow" data-reveal>Questions</p><h2 data-reveal>Good to know.</h2></div>
+    <FaqList items={c.faqs} />
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head"><p class="eyebrow" data-reveal>Keep looking</p><h2 data-reveal>More from the house.</h2></div>
+    <nav class="next" aria-label="Other collections">
+      {others.map((o) => (<a href={`/${o.slug}`} data-cursor="View"><span>{o.label}</span><span aria-hidden="true">→</span></a>))}
+      <a href="/lookbook" data-cursor="View"><span>Lookbook</span><span aria-hidden="true">→</span></a>
+      <a href="/about" data-cursor="View"><span>About Adebimpe</span><span aria-hidden="true">→</span></a>
+    </nav>
+  </section>
+
+  <CtaBand title={`Interested in ${c.label.toLowerCase()}?`} interest={c.interest} />
+  <PieceModal />
+</Base>

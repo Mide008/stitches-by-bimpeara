@@ -1,0 +1,17 @@
+---
+// src/pages/offline.astro
+// Shown by the service worker when a page is not cached and the network is down.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Offline" description="You are offline." noindex>
+  <section class="container sec" style="padding-top:calc(var(--nav-h) + 4rem)">
+    <p class="eyebrow">Offline</p>
+    <h1 style="font-size:clamp(3.2rem,10vw,8rem);margin:1rem 0">The signal has <em>dropped</em>.</h1>
+    <p class="lede" style="color:var(--muted);max-width:32rem;margin-bottom:2rem">Pages you have already opened still work. For anything new, reconnect, or call her directly.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="/">Try the home page</a>
+      <a class="btn btn-ghost" href={`tel:+${site.whatsapp}`}>Call {site.phoneDisplay}</a>
+    </div>
+  </section>
+</Base>

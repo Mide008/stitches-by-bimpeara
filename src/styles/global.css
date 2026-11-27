@@ -1,0 +1,138 @@
+/* src/styles/global.css */
+:root {
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Jost Variable', 'Futura', system-ui, sans-serif;
+  --font-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: ease-in-out;
+  --nav-h: 76px;
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+  --max: 1440px;
+}
+
+/* Two themes. Ivory is the default. Navy is the evening version. The gold is a quiet champagne, never a bright yellow. */
+:root, :root[data-theme='ivory'] {
+  --bg: #f5f1e9; --bg-2: #ece6d9; --surface: #fffdf8;
+  --ink: #16130f; --muted: #655e53; --line: rgba(22, 19, 15, .14);
+  --accent: #85692f; --accent-2: #b8995b; --on-accent: #fbf7ee;
+  --glow: rgba(184, 153, 91, .14); --tape: #e9dcb4; --tape-ink: #2a241a; --logo-1: #8a6c33; --logo-2: #b8995b; --logo-3: #7a5e2a; --logo-ink: #16130f; color-scheme: light;
+}
+:root[data-theme='navy'] {
+  --bg: #0f1524; --bg-2: #151c30; --surface: #1b2339;
+  --ink: #f3eee3; --muted: #a3a9ba; --line: rgba(243, 238, 227, .15);
+  --accent: #c9aa6b; --accent-2: #dcc58f; --on-accent: #0f1524;
+  --glow: rgba(201, 170, 107, .12); --tape: #cfb97f; --tape-ink: #1b1710; --logo-1: #c9aa6b; --logo-2: #e3cf9c; --logo-3: #b8975a; --logo-ink: #f3eee3; color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  margin: 0; min-height: 100svh; background: var(--bg); color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--font-body); overflow-x: clip;
+  transition: background-color .5s var(--ease), color .5s var(--ease);
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; font-optical-sizing: auto; line-height: .98; letter-spacing: -.015em; margin: 0; }
+p { margin: 0; }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+/* Paper grain so flat colour never feels digital */
+body::after {
+  content: ''; position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@keyframes grain { 0%{transform:translate(0,0)} 20%{transform:translate(-3%,2%)} 40%{transform:translate(2%,-3%)} 60%{transform:translate(-2%,-2%)} 80%{transform:translate(3%,3%)} 100%{transform:translate(0,0)} }
+
+.container { width: min(100% - var(--pad) * 2, var(--max)); margin-inline: auto; }
+.eyebrow { font: 600 .75rem/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.script { font-family: var(--font-script); font-size: 1.9em; line-height: 1; color: var(--accent); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Line mask reveal */
+.line { display: block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+.line-in { display: block; will-change: transform; }
+
+/* Buttons: quiet ink pills, like a boutique's own stationery */
+.btn { position: relative; display: inline-flex; align-items: center; gap: .7rem; padding: .95rem 1.7rem; border-radius: 999px;
+  font-weight: 500; font-size: .92rem; letter-spacing: .04em; overflow: hidden; isolation: isolate;
+  border: 1px solid var(--ink); transition: color .45s var(--ease), transform .45s var(--ease), border-color .45s; }
+.btn::before { content: ''; position: absolute; inset: 0; z-index: -1; transform: translateY(101%); border-radius: inherit; transition: transform .55s var(--ease); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary::before { background: var(--accent); }
+.btn-primary:hover { color: var(--on-accent); border-color: var(--accent); }
+.btn-ghost { color: var(--ink); border-color: var(--line); background: color-mix(in srgb, var(--surface) 70%, transparent); }
+.btn-ghost::before { background: var(--ink); }
+.btn-ghost:hover { color: var(--bg); border-color: var(--ink); }
+.btn:hover::before { transform: translateY(0); }
+.btn svg { width: 1.05em; height: 1.05em; transition: transform .45s var(--ease); }
+.btn:hover svg { transform: translateX(4px); }
+
+.link { position: relative; display: inline-block; }
+.link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor;
+  transform-origin: right; transform: scaleX(0); transition: transform .5s var(--ease); }
+.link:hover::after, .link[aria-current='page']::after { transform-origin: left; transform: scaleX(1); }
+
+/* Marquee */
+.marquee { display: flex; overflow: hidden; user-select: none; border-block: 1px solid var(--line); }
+.marquee-track { display: flex; flex: none; align-items: center; gap: 2.5rem; padding: 1.25rem 2.5rem 1.25rem 0;
+  animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span { font-family: var(--font-display); font-size: clamp(2.2rem, 5.4vw, 5rem); font-weight: 300; white-space: nowrap; }
+.marquee-track span.o { font-style: italic; color: var(--muted); }
+.marquee-track i { width: .9rem; height: .9rem; flex: none; background: var(--accent); border-radius: 50%; }
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+/* Theme switch circular wipe (only while toggling) */
+html.theme-switching::view-transition-old(root), html.theme-switching::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+html.theme-switching::view-transition-new(root) { z-index: 200; }
+
+/* Cursor: needle and thread, sewing machine on press */
+.thread-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 118; pointer-events: none; display: none; }
+.needle { position: fixed; top: 0; left: 0; z-index: 120; pointer-events: none; display: none; color: var(--accent); opacity: 0; transition: opacity .3s; }
+.needle.is-on { opacity: 1; } .needle.is-hidden { opacity: 0 !important; }
+.needle svg { max-width: none; position: absolute; transition: opacity .2s, transform .35s var(--ease); }
+.n-needle { left: -2px; top: -2px; transform-origin: 2px 2px; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.35)); }
+.n-machine { left: -32px; top: -46px; opacity: 0; transform: scale(.6); transform-origin: 50% 100%; filter: drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+.needle.is-link .n-needle { transform: scale(1.18) rotate(-6deg); }
+.needle.is-down .n-needle { opacity: 0; }
+.needle.is-down .n-machine { opacity: 1; transform: scale(1); }
+.m-bar { animation: stitch .14s linear infinite paused; } .m-wheel { transform-origin: 49px 26px; animation: spinw .5s linear infinite paused; }
+.needle.is-down .m-bar, .needle.is-down .m-wheel { animation-play-state: running; }
+@keyframes stitch { 50% { transform: translateY(5px); } } @keyframes spinw { to { transform: rotate(360deg); } }
+.n-label { position: absolute; left: 30px; top: 6px; padding: .35rem .7rem; border-radius: 999px; background: var(--accent); color: var(--on-accent); font: 600 .75rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; opacity: 0; transform: translateX(-6px); transition: opacity .25s, transform .35s var(--ease); }
+.needle.has-label .n-label { opacity: 1; transform: none; } .needle.is-down .n-label { opacity: 0; }
+@media (hover: hover) and (pointer: fine) { .thread-canvas, .needle { display: block; } .has-cursor, .has-cursor a, .has-cursor button, .has-cursor summary { cursor: none; } .has-cursor input, .has-cursor textarea, .has-cursor select { cursor: text; } }
+
+/* Measuring tape scroll marker */
+.tape { position: fixed; right: 14px; top: 50%; width: 22px; height: 46vh; transform: translateY(-50%); z-index: 55; pointer-events: none; display: none;
+  background: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 10px), repeating-linear-gradient(to bottom, var(--muted) 0 1px, transparent 1px 50px);
+  background-size: 8px 100%, 16px 100%; background-repeat: no-repeat; background-position: right top, right top; }
+.tape i { position: absolute; right: 0; top: 0; width: 22px; height: 2px; background: var(--accent); }
+.tape b { position: absolute; right: 28px; bottom: -22px; font: 600 .75rem/1 var(--font-body); letter-spacing: .16em; color: var(--accent); font-variant-numeric: tabular-nums; }
+@media (min-width: 1200px) { .tape { display: block; } }
+
+/* Pattern drafting marks: small registration crosses in section corners */
+.marks { position: relative; }
+.marks::before, .marks::after { content: ''; position: absolute; width: 18px; height: 18px; pointer-events: none; opacity: .5;
+  background: linear-gradient(var(--accent), var(--accent)) center / 1px 100% no-repeat, linear-gradient(var(--accent), var(--accent)) center / 100% 1px no-repeat; }
+.marks::before { top: calc(var(--nav-h) + 8px); left: var(--pad); } .marks::after { bottom: 20px; right: var(--pad); }
+.fig { font: 500 .75rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: 1.6rem; text-align: center; }
+
+.btn:active { transform: scale(.97); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  body::after { display: none; }
+}
+
+/* Tape measure that slithers across the page */
+.tape-cross { position: fixed; inset: 0; z-index: 48; pointer-events: none; overflow: hidden; }
+.tc-text { font: 600 10px var(--font-body); fill: var(--tape-ink); paint-order: stroke; stroke: var(--tape); stroke-width: 5px; stroke-linejoin: round; letter-spacing: 0; }
+@media print { .tape-cross { display: none; } }
+
+.logo { display: block; width: auto; overflow: visible; }

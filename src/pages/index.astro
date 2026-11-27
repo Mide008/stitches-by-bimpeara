@@ -1,0 +1,147 @@
+---
+// src/pages/index.astro
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { categories } from '../data/site';
+import { heroCards, cardInfo, statement, process, testimonials, homeFaqs, categoryPages, glance } from '../data/content';
+import { faqSchema, pageSchema } from '../data/schema';
+import { site } from '../data/site';
+import { BASE, format } from '../data/currency';
+const marquee = [...categories.map((c) => c.label), 'Made by hand', 'Shipped worldwide'];
+---
+<Base ogSlot="hero-1" schema={[faqSchema(homeFaqs), pageSchema('WebPage', site.name, '/', site.description)]}>
+  <section class="hero2" data-hero>
+    <canvas class="silk" data-silk aria-hidden="true"></canvas>
+    {(['left', 'right'] as const).map((side) => (
+      <div class={`cluster cluster-${side}`} data-cluster={side} aria-label="Selected pieces">
+        {heroCards[side].map((n, i) => (
+          <a class="card" data-card href={cardInfo[n].href} data-cursor="View" tabindex={i < 5 ? 0 : -1} aria-hidden={i < 5 ? undefined : 'true'}>
+            <span class="card-in"><Photo slot={`card-${n}`} alt={cardInfo[n].alt} ratio="4 / 5" sizes="(min-width: 800px) 16vw, 34vw" eager={i < 2} /></span>
+          </a>
+        ))}
+      </div>
+    ))}
+
+    <div class="hero-center">
+      <p class="eyebrow" data-hero-fade>Bespoke · Ready to wear · Jewellery · Sunglasses</p>
+      <h1 aria-label="One designer. Your whole look.">
+        <span class="line"><span class="line-in">One designer.</span></span>
+        <span class="line"><span class="line-in">Your <em>whole</em> look.</span></span>
+      </h1>
+      <p class="lede strap" data-hero-fade>
+        <span>Made to measure.</span> <span>Made to match.</span> <span>Shipped worldwide.</span>
+      </p>
+      <div class="ctas" data-hero-fade>
+        <button class="btn btn-primary hero-book" type="button" data-open-enquiry data-interest="Bespoke Sewing" data-magnetic data-cursor="Talk">Book a fitting</button>
+        <a class="btn btn-ghost" href="#collections" data-magnetic>View the collections</a>
+      </div>
+    </div>
+
+    <ol class="svc" data-hero-fade>
+      {categoryPages.map((c, i) => (
+        <li data-tilt3d><a href={`/${c.slug}`} data-cursor="View">
+          <span class="svc-top"><span>{c.eyebrow}</span><span>0{i + 1}</span></span>
+          <strong>{c.label}</strong>
+          <small>{categories[i].blurb}</small>
+          <span class="svc-price"><span class="price-from">From</span> <span data-price={Math.min(...c.pieces.map((p) => p.price))}>{format(Math.min(...c.pieces.map((p) => p.price)), BASE, 'en-NG')}</span></span>
+          <span class="svc-go">View <i aria-hidden="true">→</i></span>
+        </a></li>
+      ))}
+    </ol>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    {[0, 1].map(() => (
+      <div class="marquee-track">
+        {marquee.map((m, i) => (<><span class={i % 2 ? 'o' : ''}>{m}</span><i></i></>))}
+      </div>
+    ))}
+  </div>
+
+  <section class="container glance" aria-label="At a glance">
+    <dl>
+      {glance.map((g) => (<div data-reveal><dt>{g.k}</dt><dd>{g.v}</dd></div>))}
+    </dl>
+  </section>
+
+  <section class="container sec" style="display:grid;gap:2rem">
+    <p class="eyebrow" data-reveal>The house</p>
+    <p class="statement-text" data-words>{statement}</p>
+  </section>
+
+  <section class="container sec" id="collections" style="padding-top:0">
+    <div class="sec-head">
+      <p class="eyebrow" data-reveal>Collections</p>
+      <h2 data-reveal>Four ways in.</h2>
+    </div>
+    <ol class="index" data-index>
+      {categoryPages.map((c, i) => (
+        <li data-reveal>
+          <a class="ix-row" href={`/${c.slug}`} data-ix data-cursor="View">
+            <span class="ix-n">0{i + 1}</span>
+            <span class="ix-t">{c.label}</span>
+            <span class="ix-d">{categories[i].blurb}</span>
+            <span class="ix-thumb"><Photo slot={c.heroPhoto} alt="" ratio="1 / 1" sizes="96px" /></span>
+            <span class="ix-go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <div class="ix-preview" data-index-preview aria-hidden="true">
+      {categoryPages.map((c) => (<div data-ix-img><Photo slot={c.heroPhoto} alt="" ratio="4 / 5" sizes="320px" /></div>))}
+    </div>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head">
+      <p class="eyebrow" data-reveal>How it works</p>
+      <h2 data-reveal>From a message to a fitted garment.</h2>
+    </div>
+    <ol class="steps" style="list-style:none;padding:0;margin:0">
+      {process.map((p) => (
+        <li class="step" data-reveal><span class="n">{p.n}</span><h3>{p.title}</h3><p>{p.body}</p></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container sec">
+    <div class="sec-head">
+      <p class="eyebrow" data-reveal>Lookbook</p>
+      <h2 data-reveal>Worn, not just <em>shown</em>.</h2>
+    </div>
+    <div class="mosaic">
+      {[1, 2, 3, 4].map((n) => (
+        <a href="/lookbook" data-cursor="View"><Photo slot={`lookbook-${n}`} alt="Look from the Stitches by Bimpeara lookbook" mask ratio="3 / 4" sizes="(min-width: 900px) 24vw, 46vw" /></a>
+      ))}
+    </div>
+    <p style="margin-top:2rem"><a class="btn btn-ghost" href="/lookbook" data-magnetic>Open the lookbook</a></p>
+  </section>
+
+  <section class="container sec" style="padding-top:0" data-rotator data-interval="7000" data-mode="fade">
+    <div class="sec-head"><p class="eyebrow" data-reveal>Kind words</p></div>
+    <div class="quotes">
+      {testimonials.map((t) => (
+        <figure class="quote" data-slide style="margin:0">
+          <blockquote>“{t.quote}”</blockquote>
+          <cite><b>{t.name}</b> · {t.place}</cite>
+        </figure>
+      ))}
+    </div>
+    <div class="dots" style="margin-top:2rem" role="group" aria-label="Choose testimonial">
+      {testimonials.map((_, i) => <button class="dot" type="button" data-dot aria-label={`Show testimonial ${i + 1}`}><i></i></button>)}
+    </div>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head"><p class="eyebrow" data-reveal>Questions</p><h2 data-reveal>Before you ask.</h2></div>
+    <FaqList items={homeFaqs} />
+  </section>
+
+  <CtaBand title="Tell her the occasion." />
+</Base>
+
+<style is:global>
+  .statement-text { font-family: var(--font-display); font-size: clamp(1.9rem, 4.2vw, 3.8rem); line-height: 1.14; letter-spacing: -.02em; max-width: 28em; }
+</style>

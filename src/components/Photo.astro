@@ -1,0 +1,19 @@
+---
+// src/components/Photo.astro
+// Resolves a photo by slot name from src/assets/photos/<slot>.(jpg|jpeg|png|webp).
+// Astro resizes it, converts to WebP and writes a srcset, so pages stay light.
+// If the file does not exist yet, a tonal placeholder renders instead.
+import { Image } from 'astro:assets';
+import { photoMeta } from '../data/photos';
+interface Props { slot: string; alt: string; ratio?: string; sizes?: string; eager?: boolean; mask?: boolean; class?: string; }
+const { slot, alt, ratio = '3 / 4', sizes = '(min-width: 1000px) 33vw, 90vw', eager = false, mask = false, class: cls = '' } = Astro.props;
+const meta = photoMeta(slot);
+---
+<div class:list={['media', cls]} style={`--ar:${ratio}`} data-mask={mask ? '' : undefined}>
+  {meta ? (
+    <Image src={meta} alt={alt} widths={[480, 800, 1200, 1800]} sizes={sizes} format="webp" quality={78}
+      loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : undefined} />
+  ) : (
+    <div class="ph" role="img" aria-label={alt}>{import.meta.env.DEV && <span>{slot}</span>}</div>
+  )}
+</div>

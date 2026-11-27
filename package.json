@@ -1,0 +1,38 @@
+{
+  "name": "bimpeara",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/write-headers.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "photos": "node --env-file=.env scripts/fetch-photos.mjs",
+    "qa": "node scripts/qa.mjs",
+    "placeholders": "python3 scripts/make-placeholders.py",
+    "check": "astro check",
+    "test:e2e": "playwright test smoke",
+    "test:visual": "playwright test visual",
+    "test:visual:update": "playwright test visual --update-snapshots",
+    "images": "node scripts/image-status.mjs",
+    "launch-check": "node scripts/launch-check.mjs",
+    "lint:motion": "python3 tools/lint_motion.py --profile editorial src/styles/*.css src/scripts/*.ts src/components/*.astro src/layouts/*.astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/cormorant-garamond": "^5.3.0",
+    "@fontsource-variable/jost": "^5.3.0",
+    "@fontsource/pinyon-script": "^5.3.0",
+    "astro": "^7.4.12",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.27"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@playwright/test": "^1.65.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,19 @@
+---
+// src/pages/privacy.astro
+// PLACEHOLDER legal text. Have it reviewed before launch, especially if you have clients in the UK, EU or Nigeria.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Privacy" description="How Stitches by Bimpeara handles the information you send in an enquiry.">
+  <section class="container sec" style="padding-top:calc(var(--nav-h) + 3rem);max-width:46rem">
+    <p class="eyebrow">Privacy</p>
+    <h1 style="font-size:clamp(3rem,8vw,6rem);margin:1rem 0 2rem">Your <em>information</em>.</h1>
+    <div class="about-text" style="display:grid;gap:1.4rem">
+      <p>When you send an enquiry, the name, contact details and message you type are sent to Adebimpe so she can reply. They are used for that and nothing else.</p>
+      <p>The site does not use advertising cookies and does not track you across other websites. It remembers your theme and currency choice in your own browser, and nowhere else. If visitor statistics are switched on, they are privacy friendly counts with no personal profile.</p>
+      <p>Enquiries sent through the form pass through a form service that delivers them to Adebimpe's email. Enquiries sent by WhatsApp or email are handled by those services under their own policies.</p>
+      <p>To see, correct or delete what you sent, email <a class="link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p class="muted" style="color:var(--muted);font-size:.9rem">Last updated: add the date when this is reviewed.</p>
+    </div>
+  </section>
+</Base>

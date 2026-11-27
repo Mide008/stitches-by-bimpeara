@@ -1,0 +1,39 @@
+---
+// src/pages/lookbook.astro
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { looks, categoryPages } from '../data/content';
+import { crumbs, pageSchema } from '../data/schema';
+const chips = [{ slug: 'all', label: 'All' }, ...categoryPages.map((c) => ({ slug: c.slug, label: c.label }))];
+const nameOf = (slug: string) => categoryPages.find((c) => c.slug === slug)!.label;
+---
+<Base ogSlot="lookbook-1" title="Lookbook" description="The Stitches by Bimpeara lookbook: bespoke garments, ready to wear, jewellery and sunglasses, worn." schema={[crumbs([{ name: 'Home', path: '/' }, { name: 'Lookbook', path: '/lookbook' }]), pageSchema('CollectionPage', 'Lookbook', '/lookbook/', 'The Stitches by Bimpeara lookbook: bespoke garments, ready to wear, jewellery and sunglasses, worn.')]}>
+  <section class="container page-hero marks" data-hero>
+    <nav class="crumbs" aria-label="Breadcrumb" data-hero-fade><a href="/">Home</a><span>/</span><span>Lookbook</span></nav>
+    <p class="eyebrow" style="margin-top:1.6rem" data-hero-fade>Lookbook · <span data-look-count>{String(looks.length).padStart(2, '0')}</span> looks</p>
+    <h1 style="margin:1rem 0 1.6rem"><span class="line"><span class="line-in">Worn, not</span></span><span class="line"><span class="line-in">just <em>shown</em>.</span></span></h1>
+    <div class="chips" data-hero-fade role="group" aria-label="Filter looks">
+      {chips.map((c, i) => (<button class="chip" type="button" data-filter={c.slug} aria-pressed={i === 0 ? 'true' : 'false'}>{c.label}</button>))}
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom:2rem">
+    <div class="looks">
+      {looks.map((l, i) => (
+        <button class="look" type="button" data-tilt3d data-look data-cat={l.cat} data-caption={`Look ${String(i + 1).padStart(2, '0')} · ${nameOf(l.cat)}`} aria-label={`Open look ${i + 1}, ${nameOf(l.cat)}`} data-cursor="Open">
+          <Photo slot={l.slot} alt={l.alt} ratio={l.ratio} mask sizes="(min-width: 800px) 30vw, 48vw" />
+          <span class="cap"><b>{String(i + 1).padStart(2, '0')}</b>{nameOf(l.cat)}</span>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <div class="viewer" data-viewer role="dialog" aria-modal="true" aria-label="Look viewer" aria-hidden="true" data-lenis-prevent>
+    <div class="v-bar"><span data-viewer-count></span><button class="v-btn" type="button" data-viewer-close>Close</button></div>
+    <div class="v-stage" data-viewer-stage></div>
+    <div class="v-foot"><button class="v-btn" type="button" data-viewer-prev>Previous</button><span data-viewer-cap></span><button class="v-btn" type="button" data-viewer-next>Next</button></div>
+  </div>
+
+  <CtaBand title="See something you love?" />
+</Base>

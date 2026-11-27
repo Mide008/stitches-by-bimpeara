@@ -1,0 +1,17 @@
+---
+// src/pages/404.astro
+import Base from '../layouts/Base.astro';
+import { categoryPages } from '../data/content';
+---
+<Base title="Page not found" description="That page has come loose. Here is the way back.">
+  <section class="container sec" style="padding-top:calc(var(--nav-h) + 4rem)">
+    <p class="eyebrow">404</p>
+    <h1 style="font-size:clamp(3.4rem,11vw,9rem);margin:1rem 0">This thread<br />has come <em>loose</em>.</h1>
+    <p class="lede" style="color:var(--muted);max-width:30rem;margin-bottom:2rem">The page you wanted is not here. Pick up the thread again from one of these.</p>
+    <nav class="next" aria-label="Pages">
+      <a href="/"><span>Home</span><span aria-hidden="true">→</span></a>
+      {categoryPages.map((o) => (<a href={`/${o.slug}`}><span>{o.label}</span><span aria-hidden="true">→</span></a>))}
+      <a href="/contact"><span>Contact</span><span aria-hidden="true">→</span></a>
+    </nav>
+  </section>
+</Base>

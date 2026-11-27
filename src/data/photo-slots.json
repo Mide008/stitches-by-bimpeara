@@ -1,0 +1,262 @@
+[
+ {
+  "slot": "hero-1",
+  "query": "african fashion designer tailoring dress studio",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "hero-2",
+  "query": "african woman elegant dress fashion portrait",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "hero-3",
+  "query": "gold jewellery sunglasses fashion flat lay",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-hero",
+  "query": "seamstress sewing dress studio fabric",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-1",
+  "query": "african fashion designer fitting gown atelier",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-2",
+  "query": "african wedding dress bride",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-3",
+  "query": "tailored suit woman fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-4",
+  "query": "evening gown african woman elegant",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-5",
+  "query": "african traditional attire fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "bespoke-sewing-6",
+  "query": "african family matching outfits",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-hero",
+  "query": "african woman fashion editorial dress",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-1",
+  "query": "woman shirt dress fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-2",
+  "query": "coordinated set fashion woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-3",
+  "query": "wrap top woman fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-4",
+  "query": "kaftan dress woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-5",
+  "query": "wide leg trousers fashion woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "ready-to-wear-6",
+  "query": "african print dress fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-hero",
+  "query": "gold jewellery dark background",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-1",
+  "query": "gold statement earrings woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-2",
+  "query": "layered gold necklaces",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-3",
+  "query": "gold cuff bracelet woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-4",
+  "query": "beaded jewellery african",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-5",
+  "query": "gold ring hand",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "jewellery-6",
+  "query": "bridal jewellery set gold",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-hero",
+  "query": "fashion sunglasses model warm light",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-1",
+  "query": "cat eye sunglasses woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-2",
+  "query": "oversized square sunglasses fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-3",
+  "query": "round metal sunglasses",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-4",
+  "query": "wraparound sunglasses fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-5",
+  "query": "aviator sunglasses woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "sunglasses-6",
+  "query": "gold frame sunglasses",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-1",
+  "query": "african fashion editorial",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-2",
+  "query": "woman gold dress fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-3",
+  "query": "african model portrait style",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-4",
+  "query": "fashion fabric texture ankara",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-5",
+  "query": "woman sunglasses street style",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "about-1",
+  "query": "african woman fashion designer portrait studio",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "about-2",
+  "query": "sewing machine fabric detail hands",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-6",
+  "query": "african woman elegant gown fashion",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-7",
+  "query": "gold earrings fashion portrait",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-8",
+  "query": "fashion sunglasses portrait woman",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "lookbook-9",
+  "query": "tailored jacket woman fashion editorial",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-1",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-2",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-3",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-4",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-5",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-6",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-7",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-8",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-9",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ },
+ {
+  "slot": "card-10",
+  "query": "fashion product still life",
+  "orientation": "portrait"
+ }
+]

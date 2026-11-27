@@ -1,0 +1,34 @@
+---
+// src/components/EnquiryForm.astro
+// One form used in the drawer and on the contact page. Logic lives in src/scripts/enquiry.ts.
+import { categories, waLink } from '../data/site';
+---
+<div class="enq" data-enq-root>
+      <form data-enquiry-form novalidate>
+  <input type="text" name="botcheck" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+  <label>Your name<input name="name" required maxlength="80" autocomplete="name" placeholder="Full name" aria-describedby="e-name" /><small class="field-err" id="e-name" hidden></small></label>
+  <label>Email or WhatsApp number<input name="contact" required maxlength="120" autocomplete="email" placeholder="you@email.com or +44 7…" aria-describedby="e-contact" /><small class="field-err" id="e-contact" hidden></small></label>
+  <div class="row">
+    <label>Where are you based?<input name="country" maxlength="60" autocomplete="country-name" placeholder="Country" /></label>
+    <label>I am interested in
+      <select name="interest">
+        {categories.map((c) => <option value={c.label}>{c.label}</option>)}
+        <option value="Not sure yet">Not sure yet</option>
+      </select>
+    </label>
+  </div>
+  <label>When do you need it? <input name="when" maxlength="80" placeholder="A date, an event, or no rush" /></label>
+  <label>Tell her more<textarea name="message" maxlength="1500" rows="3" placeholder="Style, colours, occasion, anything that helps"></textarea></label>
+  <div class="actions">
+    <button class="btn btn-primary" type="submit"><span>Send enquiry</span></button>
+    <button class="btn btn-ghost" type="button" data-wa-send>Send on WhatsApp</button>
+  </div>
+  <p class="err" data-enq-error role="alert" hidden></p>
+</form>
+<div class="done" data-enq-done hidden>
+  <p class="script">thank you</p>
+  <p class="h3like">Your enquiry is on its way.</p>
+  <p data-done-note>Adebimpe will reply to the contact you left. If it is urgent, message her on WhatsApp.</p>
+  <a class="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">Open WhatsApp</a>
+</div>
+</div>

@@ -1,0 +1,54 @@
+---
+// src/components/PieceModal.astro
+// Quick view for a piece. Opens from the cards on a category page. Logic: src/scripts/pieces.ts
+import { site } from '../data/site';
+---
+<div class="pm" data-pm aria-hidden="true" data-wa={`https://wa.me/${site.whatsapp}`}>
+  <div class="pm-bg" data-pm-close></div>
+  <div class="pm-panel" role="dialog" aria-modal="true" aria-labelledby="pm-title" data-lenis-prevent>
+    <button class="pm-x" type="button" data-pm-close aria-label="Close">✕</button>
+    <div class="pm-media" data-pm-media></div>
+    <div class="pm-body">
+      <p class="eyebrow" data-pm-cat></p>
+      <h2 id="pm-title" data-pm-name></h2>
+      <p class="pm-note" data-pm-note></p>
+      <p class="pm-price"><span class="price-from">From</span> <span data-pm-price></span></p>
+      <div class="pm-tell">
+        <p>Tell her</p>
+        <ul><li>The occasion and the date</li><li>Your size, or send measurements</li><li>Colours, or a picture you love</li></ul>
+      </div>
+      <div class="pm-actions">
+        <button class="btn btn-primary" type="button" data-pm-ask>Ask about this</button>
+        <a class="btn btn-ghost" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" data-pm-wa>WhatsApp</a>
+      </div>
+      <div class="pm-nav"><button type="button" class="link" data-pm-prev>Previous</button><span data-pm-count></span><button type="button" class="link" data-pm-next>Next</button></div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .pm { position: fixed; inset: 0; z-index: 105; visibility: hidden; transition: visibility 0s .8s; }
+  .pm.open { visibility: visible; transition: none; }
+  .pm-bg { position: absolute; inset: 0; background: rgba(10, 12, 20, .55); backdrop-filter: blur(6px); opacity: 0; transition: opacity .6s var(--ease); }
+  .pm.open .pm-bg { opacity: 1; }
+  .pm-panel { position: absolute; left: 0; right: 0; bottom: 0; max-height: 92svh; overflow-y: auto; display: grid; background: var(--surface); color: var(--ink); border-radius: 24px 24px 0 0; transform: translateY(102%); transition: transform .8s var(--ease); }
+  .pm.open .pm-panel { transform: none; }
+  .pm-media { background: var(--bg-2); } .pm-media img, .pm-media .ph { width: 100%; height: auto; max-height: 52svh; object-fit: cover; display: block; aspect-ratio: 4 / 5; position: relative; }
+  .pm-body { padding: 1.6rem; display: grid; gap: 1rem; align-content: center; }
+  .pm-body h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; }
+  .pm-note { color: var(--muted); font-size: 1.05rem; }
+  .pm-tell p { font: 600 .72rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
+  .pm-tell ul { margin: 0; padding-left: 1.1rem; color: var(--ink); display: grid; gap: .25rem; font-size: .95rem; }
+  .pm-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .pm-nav { display: flex; justify-content: space-between; align-items: center; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: .9rem; }
+  .pm-x { position: absolute; top: .8rem; right: .8rem; z-index: 3; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; transition: transform .5s var(--ease); }
+  @media (hover: hover) { .pm-x:hover { transform: rotate(90deg); } }
+  .pm-x:active { transform: scale(.94); }
+  @media (prefers-reduced-motion: reduce) { .pm-panel, .pm-bg { transition-duration: .001ms !important; } }
+  @media (min-width: 820px) {
+    .pm-panel { left: 50%; right: auto; bottom: auto; top: 50%; width: min(980px, 92vw); max-height: 88svh; grid-template-columns: 1fr 1fr; border-radius: 26px; transform: translate(calc(-50% + 75vw), -50%) rotate(3deg); opacity: 0; transition: transform .95s var(--ease), opacity .5s; }
+    .pm.open .pm-panel { transform: translate(-50%, -50%); opacity: 1; }
+    .pm-media img, .pm-media .ph { max-height: none; height: 100%; aspect-ratio: auto; min-height: 460px; }
+    .pm-body { padding: 2.6rem; }
+  }
+</style>

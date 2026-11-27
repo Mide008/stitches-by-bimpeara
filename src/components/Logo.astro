@@ -1,0 +1,22 @@
+---
+// src/components/Logo.astro
+// The Stitches by Bimpeara logo as inline vector, recoloured by the theme.
+// Colours: --logo-1, --logo-2, --logo-3 (the gold) and --logo-ink (the script) in src/styles/global.css.
+// To use the exact brand yellow, set those to #f5b916, #ffd52a and #e9ae08.
+import paths from '../assets/logo-paths.json';
+interface Props { variant?: 'full' | 'mark'; class?: string; label?: string; }
+const { variant = 'full', class: cls = '', label = 'Stitches by Bimpeara' } = Astro.props;
+const viewBox = variant === 'mark' ? '265 0 473 497' : '0 0 738 497';
+---
+<svg class:list={['logo', `logo-${variant}`, cls]} viewBox={viewBox} role={label ? 'img' : undefined} aria-label={label || undefined} aria-hidden={label ? undefined : 'true'} xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id={`lg-${variant}`} x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" style="stop-color: var(--logo-1)" /><stop offset=".48" style="stop-color: var(--logo-2)" /><stop offset="1" style="stop-color: var(--logo-3)" />
+    </linearGradient>
+    {variant === 'mark' && <clipPath id="lg-clip"><path d="M265 0H738V497H335V350H265Z" /></clipPath>}
+  </defs>
+  <g clip-path={variant === 'mark' ? 'url(#lg-clip)' : undefined}>
+    <path fill={`url(#lg-${variant})`} fill-rule="evenodd" d={paths.gold} />
+    <path style="fill: var(--logo-ink)" fill-rule="evenodd" d={paths.ink} />
+  </g>
+</svg>

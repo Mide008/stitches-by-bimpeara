@@ -1,0 +1,12 @@
+---
+// src/components/CurrencySelect.astro
+import { currencies } from '../data/currency';
+interface Props { class?: string; }
+const { class: cls = '' } = Astro.props;
+---
+<label class:list={['cur', cls]}>
+  <span class="cur-l">Currency</span>
+  <select data-currency aria-label="Choose your currency">
+    {Object.entries(currencies).map(([code, c]) => <option value={code}>{code} · {c.name}</option>)}
+  </select>
+</label>

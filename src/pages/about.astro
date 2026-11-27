@@ -1,0 +1,47 @@
+---
+// src/pages/about.astro
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { aboutContent as a, categoryPages } from '../data/content';
+import { crumbs, pageSchema } from '../data/schema';
+---
+<Base ogSlot="about-1" title="About Adebimpe" description="Adebimpe is a fashion designer in Nigeria making bespoke clothing, ready to wear, jewellery and sunglasses for clients worldwide." schema={[crumbs([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]), pageSchema('AboutPage', 'About Adebimpe', '/about/', 'Adebimpe is a fashion designer in Nigeria making bespoke clothing, ready to wear, jewellery and sunglasses for clients worldwide.')]}>
+  <section class="container page-hero marks" data-hero>
+    <nav class="crumbs" aria-label="Breadcrumb" data-hero-fade><a href="/">Home</a><span>/</span><span>About</span></nav>
+    <p class="eyebrow" style="margin-top:1.6rem" data-hero-fade>About</p>
+    <h1 style="margin:1rem 0 1.6rem">{a.title.map((l) => <span class="line"><span class="line-in" set:html={l} /></span>)}</h1>
+    <p class="lede" data-hero-fade style="max-width:36rem">{a.intro}</p>
+  </section>
+
+  <section class="container sec" style="padding-top:1rem">
+    <div class="about-grid">
+      <div class="sticky"><Photo slot="about-1" alt="Adebimpe in her studio" ratio="4 / 5" mask sizes="(min-width: 900px) 40vw, 90vw" eager /></div>
+      <div class="about-text">{a.story.map((p) => <p data-reveal>{p}</p>)}</div>
+    </div>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head"><p class="eyebrow" data-reveal>How she works</p><h2 data-reveal>Four things she will not compromise on.</h2></div>
+    <ol class="pr-list">
+      {a.principles.map((p, i) => (<li data-reveal><span class="eyebrow">0{i + 1}</span><h3>{p.h}</h3><p>{p.p}</p></li>))}
+    </ol>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="about-grid">
+      <div><div class="sec-head"><p class="eyebrow" data-reveal>The studio kit</p><h2 data-reveal>Small tools, <em>serious</em> work.</h2></div>
+        <div class="kit">{a.kit.map((k) => (<div data-reveal>{k.name}<span>{k.note}</span></div>))}</div></div>
+      <Photo slot="about-2" alt="Fabric and sewing detail in the studio" ratio="4 / 5" mask sizes="(min-width: 900px) 40vw, 90vw" />
+    </div>
+  </section>
+
+  <section class="container sec" style="padding-top:0">
+    <div class="sec-head"><p class="eyebrow" data-reveal>See the work</p><h2 data-reveal>Where to go next.</h2></div>
+    <nav class="next" aria-label="Collections">
+      {categoryPages.map((o) => (<a href={`/${o.slug}`} data-cursor="View"><span>{o.label}</span><span aria-hidden="true">→</span></a>))}
+      <a href="/lookbook" data-cursor="View"><span>Lookbook</span><span aria-hidden="true">→</span></a>
+    </nav>
+  </section>
+  <CtaBand title="Start a conversation with her." />
+</Base>

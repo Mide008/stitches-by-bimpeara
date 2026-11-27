@@ -1,0 +1,31 @@
+---
+// src/pages/contact.astro
+import Base from '../layouts/Base.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { site, waLink } from '../data/site';
+import { crumbs, pageSchema } from '../data/schema';
+---
+<Base title="Contact" description="Contact Adebimpe on WhatsApp, by email or with the enquiry form. Bespoke fashion, jewellery and sunglasses, shipped worldwide." schema={[crumbs([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]), pageSchema('ContactPage', 'Contact', '/contact/', 'Contact Adebimpe on WhatsApp, by email or with the enquiry form. Bespoke fashion, jewellery and sunglasses, shipped worldwide.')]}>
+  <section class="container page-hero marks" data-hero>
+    <nav class="crumbs" aria-label="Breadcrumb" data-hero-fade><a href="/">Home</a><span>/</span><span>Contact</span></nav>
+    <p class="eyebrow" style="margin-top:1.6rem" data-hero-fade>Contact</p>
+    <h1 style="margin:1rem 0 0"><span class="line"><span class="line-in">Start with</span></span><span class="line"><span class="line-in">a <em>message</em>.</span></span></h1>
+  </section>
+
+  <section class="container sec" style="padding-top:1rem">
+    <div class="contact-grid">
+      <div>
+        <div class="channel" data-reveal><small>WhatsApp, fastest</small><a href={waLink()} target="_blank" rel="noopener noreferrer">{site.phoneDisplay}</a></div>
+        <div class="channel" data-reveal><small>Email</small><a href={`mailto:${site.email}`}>{site.email}</a><button type="button" class="link" style="font:500 .85rem var(--font-body);width:fit-content" data-copy={site.email}>Copy address</button></div>
+        <div class="channel" data-reveal><small>Instagram</small><a href={site.instagram} target="_blank" rel="noopener noreferrer">@{site.handle}</a></div>
+        <div class="channel" data-reveal><small>Based</small><span style="font-family:var(--font-display);font-size:1.5rem">{site.location}</span></div>
+        <ol class="next-steps" data-reveal>
+          <li>She reads your enquiry herself.</li>
+          <li>She replies with questions, ideas and a realistic timeline.</li>
+          <li>You agree the plan, and the work begins.</li>
+        </ol>
+      </div>
+      <div class="form-card" data-reveal><EnquiryForm /></div>
+    </div>
+  </section>
+</Base>

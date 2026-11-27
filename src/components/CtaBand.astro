@@ -1,0 +1,16 @@
+---
+// src/components/CtaBand.astro
+import { waLink } from '../data/site';
+interface Props { title?: string; interest?: string; }
+const { title = 'Tell her the occasion.', interest = 'Not sure yet' } = Astro.props;
+---
+<section class="cta-band container" data-cta-band>
+  <p class="eyebrow" data-reveal>Begin here</p>
+  <h2 data-reveal>{title}</h2>
+  <p class="cta-sub" data-reveal>A date, a mood, a picture. That is enough to start. Adebimpe replies to every enquiry herself.</p>
+  <div class="cta-btns" data-reveal>
+    <button class="btn btn-primary" type="button" data-open-enquiry data-interest={interest} data-magnetic data-cursor="Talk">Start an enquiry
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg></button>
+    <a class="btn btn-ghost" href={waLink()} target="_blank" rel="noopener noreferrer" data-magnetic>Chat on WhatsApp</a>
+  </div>
+</section>

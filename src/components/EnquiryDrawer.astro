@@ -1,0 +1,52 @@
+---
+// src/components/EnquiryDrawer.astro
+// Slides in from the right and settles in the centre on desktop. Bottom sheet on mobile.
+import { site, waLink } from '../data/site';
+import EnquiryForm from './EnquiryForm.astro';
+---
+<div class="drawer" data-drawer aria-hidden="true">
+  <div class="drawer-bg" data-close-enquiry></div>
+  <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="enq-title" data-lenis-prevent>
+    <aside class="side">
+      <button class="x" type="button" data-close-enquiry aria-label="Close">✕</button>
+      <p class="script">say hello</p>
+      <h2 id="enq-title">Tell Adebimpe what you are dreaming of.</h2>
+      <div class="side-links">
+        <a class="link" href={waLink()} target="_blank" rel="noopener noreferrer">WhatsApp {site.phoneDisplay}</a>
+        <a class="link" href={`mailto:${site.email}`}>{site.email}</a>
+        <a class="link" href={site.instagram} target="_blank" rel="noopener noreferrer">@{site.handle}</a>
+      </div>
+    </aside>
+
+    <div class="main">
+      <EnquiryForm />
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .drawer { position: fixed; inset: 0; z-index: 100; visibility: hidden; transition: visibility 0s .9s; }
+  .drawer.open { visibility: visible; transition: none; }
+  .drawer-bg { position: absolute; inset: 0; background: rgba(5, 8, 18, .62); backdrop-filter: blur(6px); opacity: 0; transition: opacity .6s var(--ease); }
+  .drawer.open .drawer-bg { opacity: 1; }
+  .drawer-panel { position: absolute; left: 0; right: 0; bottom: 0; max-height: 92svh; overflow-y: auto; display: grid; background: var(--surface); color: var(--ink);
+    border-radius: 26px 26px 0 0; transform: translateY(102%); transition: transform .8s var(--ease); }
+  .drawer.open .drawer-panel { transform: none; }
+  .side { position: relative; background: var(--accent); color: var(--on-accent); padding: 2rem; display: grid; gap: 1.2rem; align-content: space-between; }
+  .side .script { color: var(--on-accent); }
+  .side h2 { font-size: clamp(1.9rem, 3.4vw, 3rem); }
+  .side-links { display: grid; gap: .4rem; font-weight: 500; font-size: .95rem; justify-items: start; }
+  .x { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; border-radius: 50%; border: 1px solid currentColor; display: grid; place-items: center; transition: transform .5s var(--ease); }
+  @media (hover: hover) { .x:hover { transform: rotate(90deg); } }
+  .x:active { transform: scale(.94); }
+  @media (prefers-reduced-motion: reduce) { .drawer-panel, .drawer-bg { transition-duration: .001ms !important; } }
+  .main { padding: 2rem; }
+
+  @media (min-width: 820px) {
+    .drawer-panel { left: 50%; right: auto; bottom: auto; top: 50%; width: min(940px, 92vw); max-height: 88svh; grid-template-columns: .8fr 1.2fr; border-radius: 28px;
+      transform: translate(calc(-50% + 75vw), -50%) rotate(4deg); opacity: 0; transition: transform .95s var(--ease), opacity .5s; }
+    .drawer.open .drawer-panel { transform: translate(-50%, -50%); opacity: 1; }
+    .side, .main { padding: 2.6rem; }
+    .row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
